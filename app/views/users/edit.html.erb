@@ -1,0 +1,36 @@
+<% if @user.errors.any? %>
+  <h3><%= @user.errors.count %>error prohibited this obj from being saved:</h3>
+  <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<div class="container">
+  <div class="row">
+    <div class="mx-auto col-md-5">
+
+      <h2>User info</h2>
+  
+      <%= form_with model: @user, method: :patch do |f| %>
+        <div class="mb-3">
+          <label for="inputName">Name</label><br>
+          <%= f.text_field :name, style: "width:100%", id:"inputName" %><br>
+        </div> 
+       
+        <div class="mb-3">
+          <label for="inputImage">Image</label><br>
+          <%= f.file_field :profile_image, accept: "image/*", id:"inputImage" %><br>
+        </div>
+        
+        <label for="inputIntroduction">Introduction</label><br>
+        <%= f.text_area :introduction, style: "width:100%", id:"inputIntroduction" %><br>
+        
+        <%= f.submit "Update User", class: "btn btn-secondary mt-3" %>
+  
+      <% end %>
+
+     </div>
+   </div>
+</div>

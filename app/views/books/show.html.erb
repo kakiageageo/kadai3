@@ -1,2 +1,35 @@
-<h1>Books#show</h1>
-<p>Find me in app/views/books/show.html.erb</p>
+<div class="container p-3">
+  <div class="row">
+    <div class="col-md-3">
+      
+      <%= render 'tempura', user: @user, book: @boook %>
+
+    </div>
+  
+    <div class="ml-auto col-md-8 offset-md-1">
+    <h2>Book detail</h2>
+    <table class="table">
+      <tr>
+        <td>
+          <%= link_to user_path(@user.id) do %>
+            <%= image_tag @book.user.get_profile_image(100,100) %><br>
+            <%= @book.user.name %>
+          <% end %>
+        </td>
+        <td><%= @book.title %></td>
+        <td><%= @book.body %></td>
+        <td>
+          <% if @book.user == current_user %>
+            <%= link_to "Edit", edit_book_path(@book) %>
+          <% end %>
+        </td>
+        <td>
+          <% if @book.user == current_user %>
+            <%= link_to "Destroy", book_path, method: :delete %>
+          <% end %>
+        </td>
+      </tr>
+    </table>
+    </div>
+  </div>
+</div>

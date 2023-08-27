@@ -12,49 +12,77 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <header>
-      <nav>
-        <li class="header_hidari">
-          <%= link_to "Bookers", root_path %>
+  <body class="d-flex flex-column">
+    <header class="bg-dark">
+      <nav class="navbar navbar-expand-md">
+        <li class="navbar-brand">
+          <%= link_to "Bookers", root_path, class: 'nav-link text-white' %>
         </li>
         <% if user_signed_in? %>
-          <ul class="header_migi">
-            <li>
-              <%= link_to "Home", root_path %>
-            </li>
-            <li>
-              Users
-            </li>
-            <li>
-              Books
-            </li>
-            <li>
-              <%= link_to "Log out", destroy_user_session_path, method: :delete %>
-            </li>
-        <% else %>
-          <ul class="header_migi">
-            <li>
-              <%= link_to "Home", root_path %>
-            </li>
-            <li>
-              <%= link_to "About", "homes/about" %>
-            </li>
-            <li>
-              <%= link_to "Sign up", new_user_registration_path %>
-            </li>
-            <li>
-              <%= link_to "Log in", new_user_session_path %>
-            </li>
-          </ul>
+          <div class="container">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item pr-1">
+                <%= link_to user_path(current_user.id), class: 'nav-link text-white' do %>
+                <i class="fa-solid fa-home"></i>Home
+                <% end %>
+              </li>
+              <li class="nav-item pr-1">
+                <%= link_to "/users", class: 'nav-link text-white' do %>
+                <i class="fa-solid fa-users"></i>Users
+                <% end %>
+              </li>
+              <li class="nav-item pr-1">
+                <%= link_to "/books", class: 'nav-link text-white' do %>
+                <i class="fa-solid fa-book-open"></i>Books
+                <% end %>
+              </li>
+              <li class="nav-item pr-1">
+                <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-white' do %>
+                <i class="fa-solid fa-sign-out-alt"></i>Log out
+                <% end %>
+              </li>
+            </ul>
+          <% else %>
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item pr-1">
+                <%= link_to root_path, class: 'nav-link text-white' do %>
+                <i class="fa-solid fa-home"></i>Home
+                <% end %>
+              </li>
+              <li class="nav-item pr-1">
+                <%= link_to "/home/about", class: 'nav-link text-white' do %>
+                <i class="fa-solid fa-link"></i>About
+                <% end %>
+              </li>
+              <li class="nav-item pr-1">
+                <%= link_to new_user_registration_path, class: 'nav-link text-white' do %>
+                <i class="fa-solid fa-user-plus"></i>Sign up
+                <% end %>
+                </li>
+              <li class="nav-item pr-1">
+                <%= link_to new_user_session_path, class: 'nav-link text-white' do %>
+                <i class="fa-solid fa-sign-in-alt"></i>Log in
+                <% end %>
+              </li>
+            </ul>
+          </div>
         <% end %>
       </nav>
     </header>
     
-    <%= yield %>
+    <main>
+      <%= flash[:notice] %>
+      <div class="ml-5 py-3">
+        <%= yield %>
+      </div>
+    </main>
     
-    <footer>
-      CopyRight Infratop.inc
+    <footer class="align-self-center">
+      <div class="container pt-5">
+        <div class="align-items-end">
+          CopyRight Infratop.inc
+        </div>
+      </div>
     </footer>
   </body>
 </html>

@@ -1,2 +1,40 @@
-<h1>Books#edit</h1>
-<p>Find me in app/views/books/edit.html.erb</p>
+
+
+<div class="container p-3">
+  <div class="row">
+    <div class="mx-auto col-md-6">
+      <h1>Editing Book</h1>
+      
+      <% if @book.errors.any? %>
+  <h3><%= @book.errors.count %>error prohibited this obj from being saved:</h3>
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+      <%= form_with model: @book, method: :patch do |f| %>
+        <div class="my-3">
+          <label for="inputTitle">Title</label><br>
+          <%= f.text_field :title, style: "width:100%",  id:"inputTitle" %><br>
+        </div>
+        
+        <div class="my-3">
+          <label for="inputBody">Opinion</label><br>
+          <%= f.text_area :body, style: "width:100%", id:"inputBody" %><br>
+        </div>
+   
+        <%= f.submit "Update Book", class: "btn btn-success mb-3" %>
+
+      <% end %>
+
+      <%= link_to "Show", book_path(@book) %>
+  
+      |
+
+      <%= link_to "Back", "/books" %>
+      
+    </div>
+  </div>
+</div>
